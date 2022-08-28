@@ -41,6 +41,10 @@
 				line-height: 1.3em;
 			}
 
+			canvas {
+				display: block;
+			}
+
 			header, footer {
 				position: fixed;
 				z-index: 10001;
@@ -101,7 +105,7 @@
 			let object;
 
 			init();
-
+			animate();
 
 			function init() {
 
@@ -150,15 +154,15 @@
 
 					object.traverse( function ( child ) {
 
-						// if ( child.isMesh ) child.material.map = texture;
-						if ( child.isMesh ) child.castShadow = true;
+						if ( child.isMesh ) {
+					        child.receiveShadow = true;
+							child.castShadow = true;
+						}
 
 					} );
 
-					// object.position.y = -60;
+					object.position.y = 0;
 					object.scale.set(0.0005, 0.0005, 0.0005);
-					// object.rotation.y = Math.PI / -1;
-
 
 					scene.add( object );
 
@@ -196,6 +200,7 @@
 				//
 
 				renderer = new THREE.WebGLRenderer();
+				renderer.shadowMap.enabled = true;
 				renderer.setPixelRatio( window.devicePixelRatio );
 				renderer.setSize( window.innerWidth, window.innerHeight );
 				container.appendChild( renderer.domElement );
@@ -205,6 +210,7 @@
 				//
 
 				window.addEventListener( 'resize', onWindowResize );
+				onWindowResize();
 
 			}
 
@@ -214,6 +220,13 @@
 				windowHalfY = window.innerHeight / 2;
 
 				camera.aspect = window.innerWidth / window.innerHeight;
+
+				// mobile
+				console.log(camera.aspect)
+				if (camera.aspect < 1) {
+					camera.position.z = 5;
+				}
+
 				camera.updateProjectionMatrix();
 
 				renderer.setSize( window.innerWidth, window.innerHeight );
@@ -240,6 +253,8 @@
 
 				camera.position.x += ( mouseX - camera.position.x ) * .05;
 				// camera.position.y += ( - mouseY - camera.position.y ) * .05;
+
+				if (object) object.rotation.y -= 0.005;
 
 				camera.lookAt( scene.position );
 
