@@ -442,6 +442,8 @@
 		<script type="text/javascript">
 			document.addEventListener('DOMContentLoaded', function() {
 				document.querySelector('.rsvp-form').addEventListener('submit', function (event) {
+					event.preventDefault();
+
 					var data = this;
 					fetch(data.getAttribute('action'), {
 						method: data.getAttribute('method'),
@@ -450,7 +452,6 @@
 						.then(function (data) {
 							document.querySelector('.rsvp-thanks').style.visibility = 'visible';
 						});
-					event.preventDefault();
 				});
 			});
 		</script>
