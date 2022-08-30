@@ -277,7 +277,7 @@
 				hemiLight.position.set( 0, 20, 0 );
 				scene.add( hemiLight );
 
-				const spotLight = new THREE.SpotLight( 0xffffff );
+				const spotLight = new THREE.SpotLight( 0xa0a0a0 );
 				spotLight.angle = Math.PI / 5;
 				spotLight.penumbra = 0.2;
 				spotLight.position.set( 2, 3, 3 );
@@ -329,22 +329,21 @@
 						if ( child.isMesh ) {
 							child.receiveShadow = true;
 							child.castShadow = true;
-							child.material = new THREE.MeshPhysicalMaterial({  
-								roughness: 0.5,  
-								transmission: 1,  
-								thickness: 0.5,
+
+							child.material = new THREE.MeshPhongMaterial({
 							});
+
+							// child.material = new THREE.MeshPhysicalMaterial({  
+							// 	roughness: 0.5,  
+							// 	transmission: 1,  
+							// 	thickness: 0.5,
+							// });
 						}
 					} );
 					scene.add( object );
 				}
 
 				const manager = new THREE.LoadingManager( loadModel );
-
-				// texture
-
-				// const textureLoader = new THREE.TextureLoader( manager );
-				// const texture = textureLoader.load( './uv_grid_opengl.jpg' );
 
 				// model
 
@@ -368,19 +367,9 @@
 
 				}, onProgress, onError );
 
-				// const loader = new OBJLoader( manager );
-				// loader.load( './assets/models/SCIArcPAL.obj', function ( obj ) {
-
-				// 	object = obj;
-
-				// }, onProgress, onError );
-
-				//
-
 				renderer = new THREE.WebGLRenderer();
 				renderer.shadowMap.enabled = true;
 				renderer.setPixelRatio( window.devicePixelRatio );
-				renderer.setSize( document.querySelector( '.robotarm' ).offsetWidth, document.querySelector( '.robotarm' ).offsetHeight );
 				container.appendChild( renderer.domElement );
 
 				document.addEventListener( 'mousemove', onDocumentMouseMove );
@@ -393,10 +382,10 @@
 			}
 
 			function onWindowResize() {
-			  	const canvas = document.querySelector( '.robotarm' );
+			  	const canvasParentEl = document.querySelector( '.robotarm' );
 			  	// look up the size the canvas is being displayed
-			  	const width = canvas.offsetWidth;
-			  	const height = canvas.offsetHeight;
+			  	const width = canvasParentEl.offsetWidth;
+			  	const height = canvasParentEl.offsetHeight;
 
 			  	// you must pass false here or three.js sadly fights the browser
 			  	renderer.setSize(width, height);
@@ -425,7 +414,10 @@
 				camera.position.x += ( mouseX - camera.position.x ) * .05;
 				// camera.position.y += ( - mouseY - camera.position.y ) * .05;
 
-				if (object) object.rotation.y -= 0.005;
+				if (object) {
+					object.rotation.y -= 0.005;
+					object.children[0].rotation.y += 0.005
+				}
 
 				camera.lookAt( scene.position );
 
