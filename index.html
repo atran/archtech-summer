@@ -243,6 +243,7 @@
 			import * as THREE from 'three';
 
 			import { OBJLoader } from 'https://cdn.jsdelivr.net/npm/three@0.143.0/examples/jsm/loaders/OBJLoader.js';
+			import { GLTFLoader } from 'https://cdn.jsdelivr.net/npm/three@0.143.0/examples/jsm/loaders/GLTFLoader.js';
 
 			let container;
 
@@ -321,30 +322,21 @@
 				// manager
 
 				function loadModel() {
-
-					object.traverse( function ( child ) {
-
-						if ( child.isMesh ) {
-					        child.receiveShadow = true;
-							child.castShadow = true;
-							// child.material = child.material.map( function ( mat ) {
-							// 	return new THREE.MeshPhysicalMaterial({  
-							// 		roughness: 0,  
-							// 		transmission: 1,  
-							// 		thickness: 0.5, // Add refraction!
-							// 	});
-							// })
-
-							console.log(child)
-						}
-
-					} );
-
 					object.position.y = 0;
 					object.scale.set(0.0005, 0.0005, 0.0005);
 
+					object.traverse( function ( child ) {
+						if ( child.isMesh ) {
+							child.receiveShadow = true;
+							child.castShadow = true;
+							child.material = new THREE.MeshPhysicalMaterial({  
+								roughness: 0.5,  
+								transmission: 1,  
+								thickness: 0.5,
+							});
+						}
+					} );
 					scene.add( object );
-
 				}
 
 				const manager = new THREE.LoadingManager( loadModel );
@@ -368,13 +360,20 @@
 				}
 
 				function onError() {}
+				const loader = new GLTFLoader( manager );
+				loader.load( './assets/models/SCIArcPAL.glb', function ( gltf ) {
 
-				const loader = new OBJLoader( manager );
-				loader.load( './assets/models/SCIArcPAL.obj', function ( obj ) {
-
-					object = obj;
+					object = gltf.scene;
+					console.log(gltf)
 
 				}, onProgress, onError );
+
+				// const loader = new OBJLoader( manager );
+				// loader.load( './assets/models/SCIArcPAL.obj', function ( obj ) {
+
+				// 	object = obj;
+
+				// }, onProgress, onError );
 
 				//
 
