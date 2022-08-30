@@ -1,13 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>SCI-Arc EDGE: ArchTech Summer Show 2022</title>
+		<title>SCI-Arc MS ArchTech Summer Show 2022</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 	</head>
 
 	<body>
 		<style>
+			@font-face {
+				font-family: 'PxGrotesk-Regular';
+				src:	url('assets/fonts/PxGrotesk-Regular.woff2') format('woff2'),
+						url('assets/fonts/PxGrotesk-Regular.woff') format('woff');
+			}
+
 			@font-face {
 				font-family: 'PxGrotesk-Bold';
 				src:	url('assets/fonts/PxGrotesk-Bold.woff2') format('woff2'),
@@ -38,6 +44,11 @@
 				box-sizing: border-box;
 				margin: 0;
 				padding: 0;
+			}
+
+			body {
+				font-family: 'PxGrotesk-Regular';
+				font-size: 22px;
 				line-height: 1.3em;
 			}
 
@@ -45,35 +56,175 @@
 				display: block;
 			}
 
+			a, a:visited {
+				color: #00f;
+			}
+
+			ul {
+				list-style: none;
+			}
+
 			header, footer {
-				position: fixed;
+				position: absolute;
 				z-index: 10001;
-				padding: 2vh;
 				width: 100%;
+				padding: 2vh;
 			}
 
 			footer {
 				bottom: 0;
-				text-align: right;
 			}
 
 			h1, h2 {
 				font-family: 'PxGrotesk-Bold';
+				line-height: 1.33em;
 			}
 
 			h1 {
 				font-size: var(--ft-size-h1);
 			}
+
+			h2 {
+				font-size: var(--ft-size-h2);
+			}
+
+			.button {
+				background: #ebebeb;
+				color: #00f;
+				padding: 2vh 1vw;
+				border-radius: 2px;
+				display: inline-block;
+			}
+
+			input, button {
+				all: unset;
+				padding: 1vh 1vw;
+				border-radius: 2px;
+				display: inline-block;	
+				border: 1px solid #ebebeb;
+			}
+
+			main {
+				display: flex;
+				flex-direction: row;
+			}
+
+			main > * {
+				width: 50%;
+				height: 100vh;
+			}
+
+			.rsvp {
+				padding: 2vh;
+			}
+
+			.rsvp > form {
+				width: 100%;
+				display: flex;
+				font-size: 22px;
+			}
+
+			.rsvp input {
+				flex-grow: 4;
+			}
+
+			.info {
+				padding: 2vh;
+				display: flex;
+			}
+
+			.info > section {
+				width: 50%;
+				padding: 1vw;
+			}
+
+			.info > section > h3 {
+				margin-top: 1em;
+			}
+
+			.robotarm {
+				position: relative;
+			}
+
+			@media (max-width: 800px) {
+				body {
+					font-size: 16px;
+				}
+				
+				main {
+					flex-direction: column-reverse;
+				}
+
+				main > * {
+					width: 100%;
+					height: 50vh;
+				}
+			}
 		</style>
 
 
+		<main>
+			<div>
+				<aside class="rsvp">
+					<form action="https://fieldgoal.io/f/lrwt1X" method="POST">
+						<input type="text" placeholder="Email Address" name="email" />
+						<button class="button" type="submit" class="button">RSVP</a>
+					</form>
+				</aside>
+				<div class="info">
+					<section class="students">
+						<h3>Presenters</h3>
+						<ul>
+							<li>Adetokunbo Ayoade</li>
+							<li>Wei-chun Cheng</li>
+							<li>Andrew DePew</li>
+							<li>Carolina Garcia</li>
+							<li>Kai Johnson</li>
+							<li>Astha Kapila</li>
+							<li>Yashwanth Munukoti</li>
+							<li>Saeri Shorjima</li>
+							<li>Samantha Stampleton</li>
+							<li>Yundi Zhang</li>
+						</ul>
+						<h3>Final Project Instructors</h3>
+						<ul>
+							<li>M. Casey Rehm</li>
+							<li>Soomeen Hahm</li>
+							<li>John Cooper</li>
+							<li>Anthony Tran</li>
+						</ul>
+					</section>
+					<section class="faculty">
+						<h3>Guest Speakers</h3>
+						<ul>
+							<li>Natalie Alima</li>
+							<li>Biayna Bogosian</li>
+							<li>Jennifer Chen</li>
+							<li>Archie Lee Coates IV</li>
+							<li>Wendy Fok</li>
+							<li>Daniel Koehler</li>
+							<li>Laure Michelon</li>
+							<li>Case Miller</li>
+							<li>Barry Wark</li>
+						</ul>
+						<h3>Chair of Postgraduate Programs</h3>
+						<ul>
+							<li>David Ruy</li>
+						</ul>
+					</section>
+				</div>
+			</div>
+			<div class="robotarm">
+				<header>
+					<h1>SCI-Arc EDGE MS ArchTech Summer Show 2022</h1>
+				</header>
 
-		<header>
-			<h1>SCI-Arc EDGE: ArchTech Summer Show 2022</h1>
-		</header>
-		<footer>
-			<h2>Happening IRL & URL on 9/3/22, starting at 5pm PST</h2>
-		</footer>
+				<footer>
+					<h2>@ the <a href="https://goo.gl/maps/ne8iQJYeS7hftAiHA" target="_blank">Robot Annex</a> & livestream on 9/3/22, 5-9pm PST</h2>
+				</footer>
+			</div>
+		</main>
+
 
 		<!-- Import maps polyfill -->
 		<!-- Remove this when import maps will be widely supported -->
@@ -82,7 +233,7 @@
 		<script type="importmap">
 			{
 				"imports": {
-					"three": "https://cdn.jsdelivr.net/npm/three@0.114.0/build/three.module.js"
+					"three": "https://cdn.jsdelivr.net/npm/three@0.143.0/build/three.module.js"
 				}
 			}
 		</script>
@@ -91,7 +242,7 @@
 
 			import * as THREE from 'three';
 
-			import { OBJLoader } from 'https://cdn.jsdelivr.net/npm/three@0.114.0/examples/jsm/loaders/OBJLoader.js';
+			import { OBJLoader } from 'https://cdn.jsdelivr.net/npm/three@0.143.0/examples/jsm/loaders/OBJLoader.js';
 
 			let container;
 
@@ -110,7 +261,7 @@
 			function init() {
 
 				container = document.createElement( 'div' );
-				document.body.appendChild( container );
+				document.querySelector( '.robotarm' ).appendChild( container );
 
 				camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 100 );
 				camera.position.set( - 1, 1, 3 );
@@ -157,6 +308,15 @@
 						if ( child.isMesh ) {
 					        child.receiveShadow = true;
 							child.castShadow = true;
+							// child.material = child.material.map( function ( mat ) {
+							// 	return new THREE.MeshPhysicalMaterial({  
+							// 	  roughness: 0,  
+							// 	  transmission: 1,  
+							// 	  thickness: 0.5, // Add refraction!
+							// 	});
+							// })
+
+							console.log(child)
 						}
 
 					} );
@@ -202,7 +362,7 @@
 				renderer = new THREE.WebGLRenderer();
 				renderer.shadowMap.enabled = true;
 				renderer.setPixelRatio( window.devicePixelRatio );
-				renderer.setSize( window.innerWidth, window.innerHeight );
+				renderer.setSize( document.querySelector( '.robotarm' ).offsetWidth, document.querySelector( '.robotarm' ).offsetHeight );
 				container.appendChild( renderer.domElement );
 
 				document.addEventListener( 'mousemove', onDocumentMouseMove );
@@ -215,22 +375,15 @@
 			}
 
 			function onWindowResize() {
+			  	const canvas = document.querySelector( '.robotarm' );
+			  	// look up the size the canvas is being displayed
+			  	const width = canvas.offsetWidth;
+			  	const height = canvas.offsetHeight;
 
-				windowHalfX = window.innerWidth / 2;
-				windowHalfY = window.innerHeight / 2;
-
-				camera.aspect = window.innerWidth / window.innerHeight;
-
-				// mobile
-				console.log(camera.aspect)
-				if (camera.aspect < 1) {
-					camera.position.z = 5;
-				}
-
-				camera.updateProjectionMatrix();
-
-				renderer.setSize( window.innerWidth, window.innerHeight );
-
+			  	// you must pass false here or three.js sadly fights the browser
+			  	renderer.setSize(width, height);
+			  	camera.aspect = width / height;
+			  	camera.updateProjectionMatrix();
 			}
 
 			function onDocumentMouseMove( event ) {
