@@ -289,13 +289,32 @@
 
 				// ground
 
-				
+				// ground rounded rect
+				let x = 1; let y = 1; let width = 9; let height = 9; let radius = 3;
+				let shape = new THREE.Shape();
+				shape.moveTo( x, y + radius );
+				shape.lineTo( x, y + height - radius );
+				shape.quadraticCurveTo( x, y + height, x + radius, y + height );
+				shape.lineTo( x + width - radius, y + height );
+				shape.quadraticCurveTo( x + width, y + height, x + width, y + height - radius );
+				shape.lineTo( x + width, y + radius );
+				shape.quadraticCurveTo( x + width, y, x + width - radius, y );
+				shape.lineTo( x + radius, y );
+				shape.quadraticCurveTo( x, y, x, y + radius );
+
+				let roundRectGeo = new THREE.ShapeBufferGeometry( shape );
+
+				// const textureLoader = new THREE.TextureLoader();
+
 				const ground = new THREE.Mesh(
-					new THREE.PlaneGeometry( 9, 9, 1, 1 ),
+					roundRectGeo,
+					// new THREE.PlaneGeometry( 9, 9, 1, 1 ),
 					new THREE.MeshPhongMaterial( { color: 0xa0adaf, shininess: 150 } )
+					// new THREE.MeshPhongMaterial({ map: textureLoader.load('./assets/models/SamanthaBanner.jpg')})
 				);
 
 				ground.rotation.x = - Math.PI / 2; // rotates X/Y to X/Z
+				ground.position.set( -5, 0, 5)
 				ground.receiveShadow = true;
 				scene.add( ground );
 
@@ -310,9 +329,9 @@
 							child.castShadow = true;
 							// child.material = child.material.map( function ( mat ) {
 							// 	return new THREE.MeshPhysicalMaterial({  
-							// 	  roughness: 0,  
-							// 	  transmission: 1,  
-							// 	  thickness: 0.5, // Add refraction!
+							// 		roughness: 0,  
+							// 		transmission: 1,  
+							// 		thickness: 0.5, // Add refraction!
 							// 	});
 							// })
 
