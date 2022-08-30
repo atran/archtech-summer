@@ -329,10 +329,7 @@
 						if ( child.isMesh ) {
 							child.receiveShadow = true;
 							child.castShadow = true;
-
-							child.material = new THREE.MeshPhongMaterial({
-							});
-
+							child.material = new THREE.MeshPhongMaterial({});
 							// child.material = new THREE.MeshPhysicalMaterial({  
 							// 	roughness: 0.5,  
 							// 	transmission: 1,  
@@ -360,7 +357,7 @@
 
 				function onError() {}
 				const loader = new GLTFLoader( manager );
-				loader.load( './assets/models/SCIArcPAL.glb', function ( gltf ) {
+				loader.load( './assets/models/SCIArcPAL-4Mesh.glb', function ( gltf ) {
 
 					object = gltf.scene;
 					console.log(gltf)
@@ -383,11 +380,9 @@
 
 			function onWindowResize() {
 			  	const canvasParentEl = document.querySelector( '.robotarm' );
-			  	// look up the size the canvas is being displayed
 			  	const width = canvasParentEl.offsetWidth;
 			  	const height = canvasParentEl.offsetHeight;
 
-			  	// you must pass false here or three.js sadly fights the browser
 			  	renderer.setSize(width, height);
 			  	camera.aspect = width / height;
 			  	camera.updateProjectionMatrix();
@@ -412,11 +407,10 @@
 			function render() {
 
 				camera.position.x += ( mouseX - camera.position.x ) * .05;
-				// camera.position.y += ( - mouseY - camera.position.y ) * .05;
 
 				if (object) {
 					object.rotation.y -= 0.005;
-					object.children[0].rotation.y += 0.005
+					object.children[1].rotation.y += 0.005;
 				}
 
 				camera.lookAt( scene.position );
