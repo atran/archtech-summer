@@ -95,6 +95,7 @@
 				padding: 2vh 1vw;
 				border-radius: 2px;
 				display: inline-block;
+				cursor: pointer;
 			}
 
 			input, button {
@@ -129,6 +130,10 @@
 				flex-grow: 4;
 			}
 
+			.rsvp-thanks {
+				margin-top: 0.75em;
+			}
+
 			.info {
 				padding: 2vh;
 				display: flex;
@@ -137,6 +142,14 @@
 			.info > section {
 				width: 50%;
 				padding: 1vw;
+			}
+
+			.info > section:nth-child(1) {
+				padding-left: 0;
+			}
+
+			.info > section:nth-child(2) {
+				padding-right: 0;
 			}
 
 			.info > section > h3 {
@@ -167,10 +180,13 @@
 		<main>
 			<div>
 				<aside class="rsvp">
-					<form action="https://fieldgoal.io/f/lrwt1X" method="POST">
+					<form class="rsvp-form" action="https://fieldgoal.io/f/lrwt1X" method="POST">
 						<input type="text" placeholder="Email Address" name="email" />
-						<button class="button" type="submit" class="button">RSVP</a>
+						<button class="button" type="submit" class="button">RSVP</button>
 					</form>
+					<p class="rsvp-thanks" style="visibility: hidden;">
+						Thanks for RSVP'ing. Please provide proof of vaccination upon arrival.
+					</p>
 				</aside>
 				<div class="info">
 					<section class="students">
@@ -207,6 +223,7 @@
 							<li>Laure Michelon</li>
 							<li>Case Miller</li>
 							<li>Barry Wark</li>
+							<li>&nbsp;</li>
 						</ul>
 						<h3>Chair of Postgraduate Programs</h3>
 						<ul>
@@ -420,6 +437,22 @@
 
 			}
 
+		</script>
+		
+		<script type="text/javascript">
+			document.addEventListener('DOMContentLoaded', function() {
+				document.querySelector('.rsvp-form').addEventListener('submit', function (event) {
+					var data = this;
+					fetch(data.getAttribute('action'), {
+						method: data.getAttribute('method'),
+						body: new FormData(data)
+					}).then(res => res.text())
+						.then(function (data) {
+							document.querySelector('.rsvp-thanks').style.visibility = 'visible';
+						});
+					event.preventDefault();
+				});
+			});
 		</script>
 
 	</body>
